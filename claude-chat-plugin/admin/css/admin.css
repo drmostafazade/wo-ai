@@ -1,0 +1,186 @@
+/* استایل‌های اصلی */
+.claude-chat-wrap {
+    max-width: 1400px;
+    margin: 20px auto;
+}
+
+.claude-chat-container {
+    display: flex;
+    gap: 20px;
+    height: 80vh;
+    background: #fff;
+    border: 1px solid #ccd0d4;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.chat-sidebar {
+    width: 300px;
+    padding: 20px;
+    background: #f3f4f5;
+    border-right: 1px solid #ccd0d4;
+    overflow-y: auto;
+}
+
+.chat-main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.chat-messages {
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto;
+    background: #f9f9f9;
+}
+
+.chat-message {
+    margin-bottom: 15px;
+    padding: 10px 15px;
+    border-radius: 5px;
+    max-width: 80%;
+}
+
+.chat-message.user {
+    background: #0073aa;
+    color: white;
+    margin-left: auto;
+}
+
+.chat-message.assistant {
+    background: #fff;
+    border: 1px solid #ddd;
+}
+
+.chat-message.system {
+    background: #f0f0f1;
+    text-align: center;
+    margin: 0 auto;
+    font-style: italic;
+}
+
+.chat-message pre {
+    background: #282c34;
+    color: #abb2bf;
+    padding: 10px;
+    border-radius: 3px;
+    overflow-x: auto;
+    margin: 10px 0;
+}
+
+.chat-message code {
+    background: #f3f4f5;
+    padding: 2px 5px;
+    border-radius: 3px;
+    font-family: 'Courier New', monospace;
+}
+
+.chat-input-area {
+    padding: 20px;
+    background: #fff;
+    border-top: 1px solid #ccd0d4;
+}
+
+.chat-actions {
+    margin-top: 10px;
+    display: flex;
+    gap: 10px;
+}
+
+/* پروژه‌ها */
+.claude-projects-grid {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 30px;
+    margin-top: 20px;
+}
+
+.project-card {
+    background: #fff;
+    border: 1px solid #ccd0d4;
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+}
+
+.project-card h3 {
+    margin-top: 0;
+}
+
+.project-actions {
+    margin-top: 10px;
+}
+
+/* رسپانسیو */
+@media (max-width: 768px) {
+    .claude-chat-container {
+        flex-direction: column;
+        height: auto;
+    }
+    
+    .chat-sidebar {
+        width: 100%;
+        border-right: none;
+        border-bottom: 1px solid #ccd0d4;
+    }
+    
+    .claude-projects-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* وضعیت API */
+.api-status-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 15px;
+    margin-top: 15px;
+}
+
+.status-item {
+    background: #f0f0f1;
+    padding: 12px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+}
+
+.status-item strong {
+    display: block;
+    margin-bottom: 5px;
+    color: #23282d;
+}
+
+/* اسپینر WordPress */
+.spinner {
+    float: none;
+    margin: 0;
+    visibility: visible;
+    display: none;
+}
+
+.spinner.is-active {
+    display: inline-block;
+}
+
+/* مدل‌های انتخاب شده */
+.model-option input[type="radio"]:checked + strong {
+    color: #0073aa;
+}
+
+.model-option input[type="radio"]:checked ~ .model-details {
+    background: #e8f4f8;
+    padding: 10px;
+    border-radius: 3px;
+    margin-top: 10px;
+}
+
+/* دکمه‌های عملیات */
+.button-secondary {
+    margin-right: 10px;
+}
+
+.button-secondary:disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+}
