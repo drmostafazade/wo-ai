@@ -1,0 +1,520 @@
+/* AI Dr. Mostafazade - Enhanced Chat Styles */
+:root {
+   --adm-primary: #007cba;
+   --adm-secondary: #23282d;
+   --adm-success: #00a32a;
+   --adm-danger: #d63638;
+   --adm-warning: #dba617;
+   --adm-bg-light: #f0f0f1;
+   --adm-bg-dark: #1e1e1e;
+   --adm-text-light: #1e1e1e;
+   --adm-text-dark: #ffffff;
+   --adm-border: #dcdcde;
+   --adm-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* Remove WP header/footer in fullscreen mode */
+body.adm-fullscreen-chat #wpadminbar,
+body.adm-fullscreen-chat header,
+body.adm-fullscreen-chat footer {
+   display: none !important;
+}
+
+#adm-chat-container {
+   position: relative;
+   width: 100%;
+   background: var(--adm-bg-light);
+   display: flex;
+   flex-direction: column;
+   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+#adm-chat-container.adm-chat-dark {
+   background: var(--adm-bg-dark);
+   color: var(--adm-text-dark);
+}
+
+/* Chat Tabs */
+.adm-chat-tabs {
+   display: flex;
+   background: var(--adm-secondary);
+   padding: 0;
+   gap: 1px;
+   overflow-x: auto;
+}
+
+.adm-tab {
+   padding: 10px 20px;
+   background: #2c3338;
+   color: #fff;
+   cursor: pointer;
+   border: none;
+   transition: all 0.3s;
+   white-space: nowrap;
+}
+
+.adm-tab.active {
+   background: var(--adm-primary);
+}
+
+.adm-tab:hover {
+   background: #3c4348;
+}
+
+.adm-new-tab {
+   padding: 10px 15px;
+   background: transparent;
+   color: #fff;
+   border: none;
+   cursor: pointer;
+   font-size: 14px;
+}
+
+/* Main Layout */
+.adm-chat-main {
+   display: flex;
+   flex: 1;
+   overflow: hidden;
+}
+
+/* Sidebar */
+.adm-chat-sidebar {
+   width: 280px;
+   background: #f8f9fa;
+   border-left: 1px solid var(--adm-border);
+   padding: 20px;
+   overflow-y: auto;
+}
+
+.adm-chat-dark .adm-chat-sidebar {
+   background: #2c3338;
+   border-color: #3c4348;
+}
+
+/* Context Panel */
+.adm-context-panel h3,
+.adm-memory-stats h3 {
+   margin: 0 0 15px 0;
+   font-size: 16px;
+   font-weight: 600;
+}
+
+.adm-context-dropzone {
+   border: 2px dashed var(--adm-border);
+   border-radius: 8px;
+   padding: 30px;
+   text-align: center;
+   transition: all 0.3s;
+   cursor: pointer;
+   margin-bottom: 15px;
+}
+
+.adm-context-dropzone:hover,
+.adm-context-dropzone.drag-over {
+   border-color: var(--adm-primary);
+   background: rgba(0, 124, 186, 0.05);
+}
+
+.adm-context-files {
+   display: flex;
+   flex-direction: column;
+   gap: 8px;
+}
+
+.adm-context-file {
+   display: flex;
+   align-items: center;
+   padding: 8px 12px;
+   background: #fff;
+   border-radius: 6px;
+   box-shadow: var(--adm-shadow);
+}
+
+.adm-chat-dark .adm-context-file {
+   background: #3c4348;
+}
+
+/* Memory Stats */
+.adm-memory-stats {
+   margin-top: 30px;
+}
+
+.adm-stats-content {
+   display: flex;
+   flex-direction: column;
+   gap: 10px;
+}
+
+.stat-item {
+   display: flex;
+   justify-content: space-between;
+   padding: 8px 0;
+   border-bottom: 1px solid var(--adm-border);
+}
+
+.stat-value {
+   font-weight: 600;
+   color: var(--adm-primary);
+}
+
+/* Chat Content */
+.adm-chat-content {
+   flex: 1;
+   display: flex;
+   flex-direction: column;
+}
+
+/* Messages Container */
+.adm-messages-container {
+   flex: 1;
+   overflow-y: auto;
+   padding: 20px;
+   scroll-behavior: smooth;
+}
+
+.adm-message {
+   margin-bottom: 20px;
+   animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+   from {
+       opacity: 0;
+       transform: translateY(10px);
+   }
+   to {
+       opacity: 1;
+       transform: translateY(0);
+   }
+}
+
+.adm-message-header {
+   display: flex;
+   align-items: center;
+   gap: 10px;
+   margin-bottom: 8px;
+}
+
+.adm-avatar {
+   width: 32px;
+   height: 32px;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   background: var(--adm-primary);
+   color: #fff;
+   border-radius: 50%;
+   font-size: 18px;
+}
+
+.adm-message-user .adm-avatar {
+   background: var(--adm-secondary);
+}
+
+.adm-name {
+   font-weight: 600;
+   font-size: 14px;
+}
+
+.adm-message-content {
+   background: #fff;
+   padding: 15px 20px;
+   border-radius: 12px;
+   box-shadow: var(--adm-shadow);
+   line-height: 1.6;
+}
+
+.adm-chat-dark .adm-message-content {
+   background: #2c3338;
+}
+
+.adm-message-user .adm-message-content {
+   background: var(--adm-primary);
+   color: #fff;
+   margin-right: 40px;
+}
+
+/* Code Blocks with CodeMirror */
+.adm-code-block {
+   position: relative;
+   margin: 15px 0;
+   border-radius: 8px;
+   overflow: hidden;
+   background: #1e1e1e;
+}
+
+.adm-code-header {
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+   padding: 8px 15px;
+   background: #2c3338;
+   border-bottom: 1px solid #3c4348;
+}
+
+.adm-code-lang {
+   font-size: 12px;
+   color: #a0a0a0;
+   text-transform: uppercase;
+}
+
+.adm-code-actions {
+   display: flex;
+   gap: 10px;
+}
+
+.adm-code-btn {
+   padding: 4px 12px;
+   background: transparent;
+   color: #a0a0a0;
+   border: 1px solid #3c4348;
+   border-radius: 4px;
+   font-size: 12px;
+   cursor: pointer;
+   transition: all 0.3s;
+}
+
+.adm-code-btn:hover {
+   background: #3c4348;
+   color: #fff;
+}
+
+.adm-code-btn.copied {
+   background: var(--adm-success);
+   color: #fff;
+   border-color: var(--adm-success);
+}
+
+/* CodeMirror Container */
+.CodeMirror {
+   height: auto;
+   max-height: 400px;
+   font-family: 'Fira Code', 'Consolas', 'Monaco', monospace;
+   font-size: 14px;
+}
+
+.CodeMirror-scroll {
+   padding: 15px;
+}
+
+/* Input Area */
+.adm-input-area {
+   padding: 20px;
+   background: #fff;
+   border-top: 1px solid var(--adm-border);
+}
+
+.adm-chat-dark .adm-input-area {
+   background: #2c3338;
+   border-color: #3c4348;
+}
+
+.adm-input-wrapper {
+   display: flex;
+   gap: 15px;
+   align-items: flex-end;
+}
+
+#adm-user-input {
+   flex: 1;
+   padding: 12px 16px;
+   border: 2px solid var(--adm-border);
+   border-radius: 8px;
+   resize: vertical;
+   font-size: 15px;
+   line-height: 1.5;
+   transition: border-color 0.3s;
+}
+
+#adm-user-input:focus {
+   outline: none;
+   border-color: var(--adm-primary);
+}
+
+.adm-chat-dark #adm-user-input {
+   background: #1e1e1e;
+   color: #fff;
+   border-color: #3c4348;
+}
+
+.adm-input-actions {
+   display: flex;
+   gap: 10px;
+}
+
+.adm-voice-btn,
+.adm-send-btn {
+   padding: 12px 20px;
+   border: none;
+   border-radius: 8px;
+   font-size: 15px;
+   cursor: pointer;
+   transition: all 0.3s;
+}
+
+.adm-voice-btn {
+   background: #f0f0f1;
+   color: var(--adm-text-light);
+}
+
+.adm-voice-btn:hover {
+   background: #e0e0e1;
+}
+
+.adm-voice-btn.recording {
+   background: var(--adm-danger);
+   color: #fff;
+   animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+   0% { opacity: 1; }
+   50% { opacity: 0.7; }
+   100% { opacity: 1; }
+}
+
+.adm-send-btn {
+   background: var(--adm-primary);
+   color: #fff;
+}
+
+.adm-send-btn:hover {
+   background: #005a87;
+}
+
+.adm-send-btn:disabled {
+   background: #ccc;
+   cursor: not-allowed;
+}
+
+/* Input Options */
+.adm-input-options {
+   display: flex;
+   align-items: center;
+   gap: 20px;
+   margin-top: 10px;
+   font-size: 14px;
+}
+
+.adm-input-options label {
+   display: flex;
+   align-items: center;
+   gap: 6px;
+   cursor: pointer;
+}
+
+.adm-status {
+   margin-right: auto;
+   color: var(--adm-primary);
+   font-style: italic;
+}
+
+/* Feedback Buttons */
+.adm-feedback {
+   display: flex;
+   gap: 10px;
+   margin-top: 10px;
+}
+
+.adm-feedback-btn {
+   padding: 6px 12px;
+   background: #f0f0f1;
+   border: 1px solid var(--adm-border);
+   border-radius: 6px;
+   cursor: pointer;
+   transition: all 0.3s;
+}
+
+.adm-feedback-btn:hover {
+   background: #e0e0e1;
+}
+
+.adm-feedback-btn.active {
+   background: var(--adm-primary);
+   color: #fff;
+   border-color: var(--adm-primary);
+}
+
+/* Loading Animation */
+.adm-loading {
+   display: inline-flex;
+   gap: 4px;
+}
+
+.adm-loading span {
+   width: 8px;
+   height: 8px;
+   background: var(--adm-primary);
+   border-radius: 50%;
+   animation: bounce 1.4s infinite ease-in-out both;
+}
+
+.adm-loading span:nth-child(1) { animation-delay: -0.32s; }
+.adm-loading span:nth-child(2) { animation-delay: -0.16s; }
+
+@keyframes bounce {
+   0%, 80%, 100% {
+       transform: scale(0);
+   }
+   40% {
+       transform: scale(1);
+   }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+   .adm-chat-sidebar {
+       display: none;
+   }
+   
+   .adm-message-content {
+       margin-right: 0;
+   }
+   
+   .adm-input-wrapper {
+       flex-direction: column;
+   }
+   
+   .adm-input-actions {
+       width: 100%;
+       justify-content: flex-end;
+   }
+}
+
+/* Full Width Overrides */
+body.adm-fullscreen-chat {
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: hidden !important;
+}
+
+body.adm-fullscreen-chat #adm-chat-container {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    z-index: 999999 !important;
+}
+
+/* Hide WordPress elements in fullscreen mode */
+body.adm-fullscreen-chat #wpadminbar,
+body.adm-fullscreen-chat header,
+body.adm-fullscreen-chat .header,
+body.adm-fullscreen-chat footer,
+body.adm-fullscreen-chat .footer,
+body.adm-fullscreen-chat aside,
+body.adm-fullscreen-chat .sidebar {
+    display: none !important;
+}
+
+/* Ensure chat takes full space */
+.adm-chat-main {
+    height: 100% !important;
+}
+
+.adm-messages-container {
+    max-height: calc(100vh - 200px) !important;
+}
